@@ -1,4 +1,4 @@
-BalloonShopApp is a dynamic Spring Boot web application designed to enhance your balloon shopping experience. Our platform provides a range of exciting features to make your celebrations truly unforgettable:
+BalloonShopApp is a dynamic Spring Boot web application designed to enhance your balloon shopping experience. It provides a range of exciting features to make your celebrations truly unforgettable:
 
 User Authentication: Begin with secure login and registration, ensuring your personal data is protected.
 
