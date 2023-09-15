@@ -16,7 +16,7 @@ BalloonShopApp is a dynamic Spring Boot web application designed to enhance your
 
 - **Streamlined Delivery Setup:** Simplify the process of providing delivery information for a hassle-free experience.
 
-- **Order History:** Access your comprehensive order history, allowing you to track your past purchases and plan for future celebrations.
+- **Order History:** Access your comprehensive order history.
 
 ## Installation
 
