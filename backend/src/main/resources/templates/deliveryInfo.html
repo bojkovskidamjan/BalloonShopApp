@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>WP lab - Delivery Info</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            width: 800px;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, td, th {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Balloon Order page - Delivery information</h1>
+</header>
+<section>
+    <form th:action="@{/balloonOrder}" th:method="POST">
+        <label for="clientName">Client Name:</label><br/>
+        <input type="text" id="clientName" name="clientName"/><br/><br>
+        <label for="clientAddress">Delivery Address:</label><br/><br>
+        <textarea cols="40" rows="3" id="clientAddress" name="clientAddress"></textarea><br/><br>
+        <input type="submit" th:value="Submit"/>
+    </form>
+</section>
+<aside>
+    <table>
+        <tr>
+            <th colspan="2">Your Order Status</th>
+        </tr>
+        <tr>
+            <td><b>Balloon Color</b></td>
+            <td><span th:text="${balloonColor}"></span></td>
+        </tr>
+        <tr>
+            <td><b>Balloon Size</b></td>
+            <td><span th:text="${balloonSize}"></span></td>
+        </tr>
+    </table>
+</aside>
+</body>
+</html>

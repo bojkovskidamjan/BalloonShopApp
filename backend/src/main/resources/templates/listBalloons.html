@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .edit-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background-color: #1d9e30;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        .order-button {
+            background-color: #6610f2;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .order-button:hover {
+            background-color: #580af2;
+        }
+
+        .login-button {
+            background-color: #ffc107;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #e0a800;
+        }
+
+        .logout-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #545b62;
+        }
+
+        /* Filter and Search Bar Styles */
+        .filter-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-bar select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .filter-bar button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        .search-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 60%;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+    <div th:if="${#request.getRemoteUser()!=null}">
+        Hi, <span th:text="${#request.getRemoteUser()}"></span>
+        <a href="/logout" class="logout-button">Logout</a>
+    </div>
+    <div th:if="${#request.getRemoteUser()==null}">
+        <a href="/login" class="login-button">Login</a>
+    </div>
+</header>
+<main>
+    <a href="/manufacturers">List of manufacturers</a><br>
+    <div th:if="${hasError}" class="error-message" th:text="${error}"></div><br>
+    <div th:if="${typeErrorSort}" class="error-message" th:text="${typeErrorMessage}"></div><br>
+    <a href="/balloons">Refresh page</a><br>
+    <h2>These are all the balloons we have in our shop</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Manufacturer</th>
+            <th>Type</th>
+            <th th:if="${#request.getRemoteUser()!=null}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="balloon" th:each="balloon: ${balloonList}">
+            <td><span th:text="${balloon.getName()}"></span></td>
+            <td><span th:text="${balloon.getDescription()}"></span></td>
+            <td><span th:text="${balloon.getManufacturer().getName()}"></span></td>
+            <td><span th:text="${balloon.getType().toString()}"></span></td>
+            <td th:if="${#request.getRemoteUser()!=null}">
+                <span sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form th:method="GET" th:action="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}">
+                        <button class="edit-button" type="submit">Edit</button>
+                    </form>
+                    <form th:method="POST" th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}">
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                </span>
+                <form th:method="POST" th:action="@{'/balloons/add-to-order/{id}' (id=${balloon.getId()})}">
+                    <button class="order-button" type="submit">Add to Order</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table><br>
+    <span sec:authorize="hasRole('ROLE_ADMIN')">
+        <a class="add-balloon-btn" href="/balloons/add-balloon">Add new balloon</a><br>
+    </span><br>
+    <hr><br>
+    <h3>Filter By the Type of the balloon</h3>
+    <div class="filter-bar">
+        <form th:method="POST" th:action="@{'/balloons/filter'}">
+            <select name="type" id="type">
+                <option th:each="t : ${type}" th:value="${t.toString()}" th:text="${t.toString()}"></option>
+            </select>
+            <button type="submit" value="Submit">Filter</button>
+        </form>
+    </div><br>
+    <hr><br>
+    <h3>Search for some balloons by any attribute</h3>
+    <div class="search-bar">
+        <form th:method="POST" th:action="@{'/balloons/search'}">
+            <input type="text" name="resultBallons" placeholder="Search by attribute"/>
+            <button type="submit" value="Submit">Search</button>
+        </form>
+    </div><br><br><br><br>
+</main>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>WP lab - Confirmation Info</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, td, th {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        td {
+            background-color: #fff;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <header>
+        <h1>Balloon Order page - Order confirmation</h1>
+    </header>
+    <table>
+        <tr>
+            <th colspan="2">Your Order Status</th>
+        </tr>
+        <tr>
+            <td><b>Client Name</b></td>
+            <td><span th:text="${session.clientName}"></span></td>
+        </tr>
+        <tr>
+            <td><b>Client Address</b></td>
+            <td><span th:text="${session.clientAddress}"></span></td>
+        </tr>
+        <tr>
+            <td><b>Client IP Address</b></td>
+            <td><span th:text="${session.ClientIP}"></span></td>
+        </tr>
+        <tr>
+            <td><b>Client Browser</b></td>
+            <td><span th:text="${session.ClientBrowser}"></span></td>
+        </tr>
+        <tr>
+            <td><b>Balloon Color</b></td>
+            <td><span th:text="${session.balloonOrder.balloonColor}"></span></td>
+        </tr>
+        <tr>
+            <td><b>Balloon Size</b></td>
+            <td><span th:text="${session.balloonOrder.balloonSize}"></span></td>
+        </tr>
+    </table>
+
+    <a href="/logout">Log out</a>
+
+    <a href="/balloons">New Order</a>
+
+    <a href="/orders">List of all orders</a>
+</section>
+</body>
+</html>

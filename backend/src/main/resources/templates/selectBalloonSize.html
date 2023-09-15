@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Balloon Size</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            width: 800px;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, td, th {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+
+        h2 {
+            font-size: 1.2em;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Balloon Order page - Select Balloon Size</h1>
+</header>
+<section>
+    <h2>Choose balloon size:</h2>
+    <form th:action="@{/selectBalloon}" th:method="POST">
+        <input type="radio" name="size" value="Small"> Small <br/>
+        <input type="radio" name="size" value="Medium"> Medium <br/>
+        <input type="radio" name="size" value="Big"> Big <br/>
+        <input type="radio" name="size" value="Extra Big"> Extra Big <br/>
+        <br/>
+        <input type="submit" th:value="Submit"/>
+    </form>
+</section>
+<aside>
+    <table>
+        <tr>
+            <th colspan="2">Your Order Status</th>
+        </tr>
+        <tr>
+            <td><b>Balloon Color</b></td>
+            <td><span th:text="${balloonColor}"></span></td>
+        </tr>
+    </table>
+</aside>
+</body>
+</html>

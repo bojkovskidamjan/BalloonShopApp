@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register page</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        div.thymeleaf-error {
+            color: red;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+<form th:method="POST" th:action="@{/register}">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" />
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" />
+    </div>
+
+    <div>
+        <label for="repeatPassword">Repeat password:</label>
+        <input type="password" id="repeatPassword" name="repeatPassword" placeholder="Enter your password again" />
+    </div>
+
+    <div>
+        <input name="role" type="radio" id="ROLE_ADMIN" value="ROLE_ADMIN">
+        <label for="ROLE_ADMIN">ROLE_ADMIN</label>
+        <input name="role" type="radio" id="ROLE_USER" value="ROLE_USER">
+        <label for="ROLE_USER">ROLE_USER</label>
+    </div>
+
+    <div th:if="${hasError}" class="thymeleaf-error">
+        <div th:text="${error}"></div>
+    </div>
+
+    <div>
+        <button type="submit" name="submit" th:value="Submit">Register</button>
+    </div>
+    <div>
+        <a href="/login">Back to Sign-In</a>
+    </div>
+</form>
+</body>
+</html>

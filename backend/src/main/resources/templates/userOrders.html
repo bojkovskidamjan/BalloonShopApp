@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Orders</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            width: 800px;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, td, th {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        div {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h2>Orders for the user: <span th:text="${#request.getRemoteUser()}" /> from the shopping cart that was created on: <span th:text="${shoppingCart.getDateCreated()}"/></h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Balloon color</th>
+        <th>Balloon size</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order: ${shoppingCart.getOrders()}">
+        <td><span th:text="${order.getBalloonColor()}" /></td>
+        <td><span th:text="${order.getBalloonSize()}" /></td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a href="/logout">Log out</a>
+</div><br>
+
+<div>
+    <a href="/balloons">New Order</a>
+</div><br> <br>
+</body>
+</html>

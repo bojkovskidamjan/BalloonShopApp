@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all manufacturers that build our balloons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        table {
+            background-color: white;
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        div.thymeleaf-header {
+            text-align: right;
+            padding: 10px;
+        }
+
+        span.username {
+            font-weight: bold;
+        }
+
+        a.logout-link {
+            color: red;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        a.login-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="thymeleaf-header">
+    <div th:if="${#request.getRemoteUser()!=null}">
+        Hi, <span class="username" th:text="${#request.getRemoteUser()}"></span>
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+    <div th:if="${#request.getRemoteUser()==null}">
+        <a href="/login" class="login-link">Login</a>
+    </div>
+</div>
+<h1>List of all manufacturers:</h1>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="manufacturer: ${manufacturers}">
+        <td><span th:text="${manufacturer.getName()}"></span></td>
+        <td><span th:text="${manufacturer.getAddress()}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a href="/balloons">Back to balloons list</a>
+</body>
+</html>

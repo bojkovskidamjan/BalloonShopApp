@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add / Edit Balloon page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        form {
+            background-color: white;
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: white;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' viewBox='0 0 12 6'%3E%3Cpath d='M6 0l-6 6h12z' fill='%23007bff'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 12px;
+            padding-right: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h2>Add or edit the balloon</h2>
+<form th:method="POST" th:action="@{'/balloons/add'}">
+    <div>
+        <label for="name">Balloon name:</label>
+        <input type="text"
+               id="name"
+               name="name"
+               th:value="(${balloonToEdit} != null ? ${balloonToEdit.getName()} : '')"
+               required
+               placeholder="Enter balloon name">
+    </div>
+
+    <div>
+        <label for="description">Balloon description:</label>
+        <input type="text"
+               id="description"
+               name="description"
+               th:value="(${balloonToEdit} != null ? ${balloonToEdit.getDescription()} : '')"
+               required
+               placeholder="Enter balloon description">
+    </div>
+
+    <div>
+        <label for="manufacturer">Balloon manufacturer:</label>
+        <select name="manufacturer" id="manufacturer">
+            <option th:if="${balloonToEdit} != null"
+                    th:each="manufacturer : ${manufacturerList}"
+                    th:value="${manufacturer.getId()}"
+                    th:selected="${balloonToEdit.getManufacturer() != null &&
+                                balloonToEdit.getManufacturer().getId() == manufacturer.getId()}"
+                    th:text="${manufacturer.getName()}">
+            </option>
+            <option th:if="${balloonToEdit} == null"
+                    th:each="manufacturer : ${manufacturerList}"
+                    th:value="${manufacturer.getId()}"
+                    th:text="${manufacturer.getName()}">
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label for="type">Balloon type:</label>
+        <select name="type" id="type">
+            <option th:if="${balloonToEdit} != null"
+                    th:each="t : ${type}"
+                    th:value="${t.toString()}"
+                    th:selected="${balloonToEdit.getType() != null &&
+                                balloonToEdit.getType().toString().equals(t.toString())}"
+                    th:text="${t.toString()}">
+            </option>
+            <option th:if="${balloonToEdit} == null"
+                    th:each="t : ${type}"
+                    th:value="${t.toString()}"
+                    th:text="${t.toString()}">
+            </option>
+        </select>
+    </div>
+
+    <div class="hidden">
+        <input type="text" id="id" name="id" th:value="(${balloonToEdit} != null ? ${balloonToEdit.getId()} : '')">
+    </div>
+
+    <div>
+        <button name="submit" type="submit" th:value="Submit">Add / Edit</button>
+    </div>
+</form>
+
+<a href="/balloons">Back to list</a>
+</body>
+</html>
