@@ -1,13 +1,27 @@
-BalloonShopApp is a dynamic Spring Boot web application designed to enhance your balloon shopping experience. It provides a range of exciting features to make your celebrations truly unforgettable:
+# BalloonShopApp: Elevate Your Celebrations
 
-User Authentication: Begin with secure login and registration, ensuring your personal data is protected.
+BalloonShopApp is a dynamic Spring Boot web application designed to enhance your balloon shopping experience. Our platform provides a range of exciting features to make your celebrations truly unforgettable:
 
-Balloon Management: Easily add, edit, and remove balloons from your shopping cart. Tailor your order to perfection.
+## Features
 
-Effortless Discovery: Utilize advanced search and filtering options to discover the ideal balloons based on color, size, type, and more.
+- **User Authentication:** Begin with secure login and registration, with the ability to choose your user role.
 
-Balloon Sizing: Choose the perfect balloon size that suits your event's needs.
+- **Role-Based Permissions:** Customize your experience based on your selected role. As a `ROLE_USER`, you can add balloons to your order, while as a `ROLE_ADMIN`, you have full control over balloon management, including adding, editing, and deleting balloons.
 
-Streamlined Delivery Setup: Simplify the process of providing delivery information for a hassle-free experience.
+- **Balloon Management:** Easily add, edit, and remove balloons from your shopping cart. Tailor your order to perfection.
 
-Order History: Access your comprehensive order history, allowing you to track your past purchases and plan for future celebrations.
+- **Effortless Discovery:** Utilize advanced search and filtering options to discover the ideal balloons based on color, size, type, and more.
+
+- **Balloon Sizing:** Choose the perfect balloon size that suits your event's needs.
+
+- **Streamlined Delivery Setup:** Simplify the process of providing delivery information for a hassle-free experience.
+
+- **Order History:** Access your comprehensive order history, allowing you to track your past purchases and plan for future celebrations.
+
+## Installation
+
+To run BalloonShopApp locally, follow these steps:
+
+1. Clone the repository.
+2. Configure your database settings in `application.properties`.
+3. Build and run the application using your preferred IDE or `./mvnw spring-boot:run`.
